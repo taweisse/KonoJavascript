@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Play Kono</title>
+        <link rel="stylesheet" type="text/css" href="kono-styles.css" />
+
+        <script src="jquery-3.3.1.slim.js"></script>
+        <script src="filesaver.js"></script>
+        <script src="enums.js"></script>
+        <script src="serializer.js"></script>
+        <script src="move.js"></script>
+        <script src="player.js"></script>
+        <script src="human.js"></script>
+        <script src="computer.js"></script>
+        <script src="board.js"></script>
+        <script src="boardview.js"></script>
+        <script src="game.js"></script>
+        <script src="tournament.js"></script>
+        <script src="kono-main.js"></script>
+    </head>
+    <body>
+        <!-- The first screen that the user sees when the page is loaded. -->
+        <div id="welcomePage">
+            <div id="logo">kono</div>
+            <button id="newButton" class="button">start new tournament</button>
+            <label class="button">
+                <input type="file" id="loadButton"/>
+                load saved tournament
+            </label>
+        </div>
+
+        <!-- Allows the user to configure and start a new tournament. -->
+        <div id="newTournamentPage">
+            <div>
+                <h3>Select a board size:</h3>
+                <label for="bs1">5</label>
+                <input id="bs1" type="radio" name="boardSizeRadio" value="5" checked="checked">
+                <label for="bs2">7</label>
+                <input id="bs2" type="radio" name="boardSizeRadio" value="7">
+                <label for="bs3">9</label>
+                <input id="bs3" type="radio" name="boardSizeRadio" value="9">
+            </div>
+            <div>
+                <h3>Select player 1:</h3>
+                <label for="p11">Human</label>
+                <input id="p11" type="radio" name="p1Type" value="human" checked="checked">
+                <label for="p12">Computer</label>
+                <input id="p12" type="radio" name="p1Type" value="computer">
+            </div>
+            <div>
+                <h3>Select player 2:</h3>
+                <label for="p21">Human</label>
+                <input id="p21" type="radio" name="p2Type" value="human">
+                <label for="p22">Computer</label>
+                <input id="p22" type="radio" name="p2Type" value="computer" checked="checked">
+            </div>
+            <br>
+            <br>
+            <button id="rollDiceButton" class="button">roll dice</button>
+            <br>
+            <br>
+            <div id="afterRoll">
+                <!-- Hidden input will store the winner of the dice roll. -->
+                <input type="hidden" id="hiddenWinner">
+                <div id="rollResults"></div>
+                <br>
+                <br>
+                <h3 id="rollWinner"></h3>
+                <label for="pc1">White</label>
+                <input id="pc1" type="radio" name="pickColor" value="color-white" checked="checked">
+                <label for="pc2">Black</label>
+                <input id="pc2" type="radio" name="pickColor" value="color-black">
+                <button id="createTournamentButton" class="button">create tournament</button>
+            </div>
+        </div>
+
+        <!-- Allows the user to play a game after one has been created or loaded. -->
+        <div id="playGamePage">
+            <div id="board">
+                <!-- The BoardView class will generate the game board here. -->
+            </div>
+            <button id="helpBtn" class="button">ask for help</button>
+            <button id="quitBtn" class="button">quit game</button>
+            <button id="saveBtn" class="button">save and quit</button>
+            <button id="moveBtn" class="button">move computer</button>
+            <button id="skipBtn" class="button">skip move</button>
+            <br>
+            <br>
+            <div id="scores">
+                Player 1 Score: <div id="p1Score"></div>
+                Player 2 Score: <div id="p2Score"></div>
+            </div>
+            <br>
+            <textarea id="gameLog" cols="50" rows="20" readonly></textarea>
+        </div> 
+
+        <!-- Shows the user who won the last game and asks if they would like to play again. -->
+        <div id="gameWinnerPage">
+            <div id="gameWinInfo"></div>
+            <input type="hidden" id="lastGameWinner">
+            <br>
+            <br>
+            <button class="button" id="anotherGameBtn">play another game</button>
+            <button class="button" id="endTournamentBtn">end tournament</button>
+            <div id="playAgainOptions">
+                <h3>Select a board size:</h3>
+                <label for="bs11">5</label>
+                <input id="bs11" type="radio" name="continueBoardSizeRadio" value="5" checked="checked">
+                <label for="bs22">7</label>
+                <input id="bs22" type="radio" name="continueBoardSizeRadio" value="7">
+                <label for="bs33">9</label>
+                <input id="bs33" type="radio" name="continueBoardSizeRadio" value="9">
+                <br>
+                <h3 id="lastWinnerColorPicker"></h3>
+                <label for="pc11">White</label>
+                <input id="pc11" type="radio" name="continuePickColor" value="color-white" checked="checked">
+                <label for="pc22">Black</label>
+                <input id="pc22" type="radio" name="continuePickColor" value="color-black">
+                <br>
+                <br>
+                <button id="continueTournamentBtn" class="button">start game</button>
+            </div>
+        </div>
+
+        <!-- Shows the user who won the tournament. -->
+        <div id="tournamentWinnerPage">
+            <div id="tournamentWinInfo"></div>
+            <br>
+            <br>
+            <button class="button" id="backToHomeBtn">Return to homepage</button>
+        </div>
+    </body>
+</html>
